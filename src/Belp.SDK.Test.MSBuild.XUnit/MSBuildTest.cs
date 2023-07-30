@@ -28,7 +28,7 @@ public class MSBuildTest
         {
             EnableNodeReuse = true;
             Loggers = Loggers == null
-                ? logger.AsSingletonEnumerable()
+                ? logger.AsSingleEnumerable()
                 : Loggers.Append(logger)
                 ;
         }

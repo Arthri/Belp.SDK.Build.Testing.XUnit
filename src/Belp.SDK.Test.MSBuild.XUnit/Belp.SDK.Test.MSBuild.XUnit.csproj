@@ -19,6 +19,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Using Include="Belp.SDK.Test.MSBuild.XUnit.Extensions" />
+  </ItemGroup>
+
 
 
   <!-- Package Information -->
