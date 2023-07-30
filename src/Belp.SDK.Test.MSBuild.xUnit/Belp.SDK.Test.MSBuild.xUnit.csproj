@@ -1,0 +1,29 @@
+<Project Sdk="Belp.SDK.PackOnly/0.4.0">
+
+  <!-- Package Information -->
+  <PropertyGroup>
+    <Description>An SDK for testing MSBuild configurations with xUnit.</Description>
+    <DevelopmentDependency>true</DevelopmentDependency>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Arthri/Belp.SDK.Test.MSBuild.xUnit/</PackageProjectUrl>
+    <PackageTags>msbuild;sdk;test;xunit</PackageTags>
+    <Product>Belp</Product>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <Title>MSBuild xUnit Test SDK</Title>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <CopyrightOwner Include="Arthri" Years="2023" />
+  </ItemGroup>
+
+
+
+  <!-- Development Dependencies -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>
