@@ -8,6 +8,11 @@
 
 
 
+  <Import Project="Sdk.props" Sdk="Belp.SDK.Common" Version="0.2.0" />
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+
+
+
   <!-- Dependencies -->
   <Import Project="$(MSBuildThisFileDirectory)Dependencies.props" />
 
