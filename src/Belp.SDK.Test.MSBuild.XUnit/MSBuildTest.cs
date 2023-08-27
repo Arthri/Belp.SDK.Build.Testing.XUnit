@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Microsoft.Build.Execution;
+using Microsoft.Build.Framework;
 using Xunit.Abstractions;
 
 namespace Belp.SDK.Test.MSBuild.XUnit;
@@ -28,7 +29,7 @@ internal class MSBuildTest
         {
             EnableNodeReuse = true;
             Loggers = Loggers == null
-                ? logger.AsSingleEnumerable()
+                ? new SingleEnumerable<ILogger>(logger)
                 : Loggers.Append(logger)
                 ;
         }
