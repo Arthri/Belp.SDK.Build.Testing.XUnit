@@ -9,6 +9,6 @@
 
 
   <!-- Dependencies -->
-  <Import Project="$(MSBuildThisFileDirectory)Sdk\Dependencies.props" />
+  <Import Project="$(MSBuildThisFileDirectory)Dependencies.props" />
 
 </Project>
