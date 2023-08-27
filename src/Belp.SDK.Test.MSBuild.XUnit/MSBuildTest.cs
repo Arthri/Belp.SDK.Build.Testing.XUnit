@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Microsoft.Build.Execution;
 using Microsoft.Build.Framework;
 using Xunit.Abstractions;
@@ -8,17 +8,17 @@ namespace Belp.SDK.Test.MSBuild.XUnit;
 /// <summary>
 /// Provides the boilerplate for testing MSBuild projects.
 /// </summary>
-internal class MSBuildTest
+internal sealed class MSBuildTest
 {
     /// <summary>
     /// Inherits from <see cref="BuildParameters"/> and sets additional default values.
     /// </summary>
-    protected class BuildParametersWithDefaults : BuildParameters
+    private class BuildParametersWithDefaults : BuildParameters
     {
         /// <summary>
         /// Initializes a new instance of <see cref="BuildParameters"/> with additional default values.
         /// </summary>
-        public BuildParametersWithDefaults(MSBuildTest test) : this(test.Logger)
+        public BuildParametersWithDefaults(MSBuildTest test) : this(test._logger)
         {
         }
 
@@ -38,7 +38,7 @@ internal class MSBuildTest
     /// <summary>
     /// Gets the test's logger.
     /// </summary>
-    protected XUnitMSBuildLoggerAdapter Logger { get; }
+    private readonly XUnitMSBuildLoggerAdapter _logger;
 
     public IReadOnlyList<Diagnostic>? ExpectedErrors { get; init; }
     public IReadOnlyList<Diagnostic>? ExpectedWarnings { get; init; }
@@ -53,7 +53,7 @@ internal class MSBuildTest
     /// <param name="output">The test output helper from xUnit.</param>
     public MSBuildTest(ITestOutputHelper output)
     {
-        Logger = new XUnitMSBuildLoggerAdapter(output);
+        _logger = new XUnitMSBuildLoggerAdapter(output);
     }
 
     /// <summary>
@@ -100,29 +100,29 @@ internal class MSBuildTest
     /// Verifies the specified build result is successful.
     /// </summary>
     /// <param name="buildResult">The build result to verify.</param>
-    public void VerifyBuild(BuildResult buildResult)
+    private void VerifyBuild(BuildResult buildResult)
     {
         _ = buildResult.OverallResult.Should().Be(BuildResultCode.Success);
         _ = ExpectedErrors is null or { Count: 0 }
-            ? Logger.Errors.Should().BeEmpty()
-            : Logger.Errors.Order().Should().BeEquivalentTo(ExpectedErrors.Order())
+            ? _logger.Errors.Should().BeEmpty()
+            : _logger.Errors.Order().Should().BeEquivalentTo(ExpectedErrors.Order())
             ;
         _ = ExpectedWarnings is null or { Count: 0 }
-            ? Logger.Warnings.Should().BeEmpty()
-            : Logger.Warnings.Order().Should().BeEquivalentTo(ExpectedWarnings.Order())
+            ? _logger.Warnings.Should().BeEmpty()
+            : _logger.Warnings.Order().Should().BeEquivalentTo(ExpectedWarnings.Order())
             ;
         if (ExpectedMessages is not null)
         {
             _ = ExpectedMessages is { Count: 0 }
-                ? Logger.Messages.Should().BeEmpty()
-                : Logger.Messages.Order().Should().BeEquivalentTo(ExpectedMessages.Order())
+                ? _logger.Messages.Should().BeEmpty()
+                : _logger.Messages.Order().Should().BeEquivalentTo(ExpectedMessages.Order())
                 ;
         }
         if (ExpectedDiagnostics is not null)
         {
             _ = ExpectedDiagnostics is { Count: 0 }
-                ? Logger.Diagnostics.Should().BeEmpty()
-                : Logger.Diagnostics.Order().Should().BeEquivalentTo(ExpectedDiagnostics.Order())
+                ? _logger.Diagnostics.Should().BeEmpty()
+                : _logger.Diagnostics.Order().Should().BeEquivalentTo(ExpectedDiagnostics.Order())
                 ;
         }
 
