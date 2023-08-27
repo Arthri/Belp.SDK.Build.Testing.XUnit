@@ -1,5 +1,7 @@
 ﻿using Microsoft.Build.Framework;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using Xunit.Abstractions;
 
 namespace Belp.SDK.Test.MSBuild.XUnit;

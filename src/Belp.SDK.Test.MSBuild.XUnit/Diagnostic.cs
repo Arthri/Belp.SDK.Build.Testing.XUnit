@@ -1,4 +1,6 @@
 ﻿using Microsoft.Build.Framework;
+using System;
+
 namespace Belp.SDK.Test.MSBuild.XUnit;
 
 internal record struct Diagnostic(DiagnosticSeverity Severity, string Code, string? Message, string File, TextSpan Span, string Project)

@@ -1,7 +1,10 @@
 ﻿using FluentAssertions;
 using Microsoft.Build.Execution;
 using Microsoft.Build.Framework;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Xunit.Abstractions;
 
 namespace Belp.SDK.Test.MSBuild.XUnit;
