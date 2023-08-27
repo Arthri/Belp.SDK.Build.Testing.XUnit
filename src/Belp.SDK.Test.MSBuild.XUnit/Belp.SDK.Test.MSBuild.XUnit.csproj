@@ -41,6 +41,15 @@
   <!-- Dependencies -->
   <Import Project="$(MSBuildThisFileDirectory)Assets\Sdk\Dependencies.props" />
 
+  <PropertyGroup>
+    <UseXUnitVisualStudioRunner>false</UseXUnitVisualStudioRunner>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Remove="coverlet.collector;Microsoft.NET.Test.Sdk;xunit" />
+    <PackageReference Include="xunit.abstractions" Version="2.0.3" />
+  </ItemGroup>
+
 
 
   <!-- Development Dependencies -->
