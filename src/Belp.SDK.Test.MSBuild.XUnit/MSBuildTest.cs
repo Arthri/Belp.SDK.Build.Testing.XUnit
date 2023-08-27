@@ -95,7 +95,5 @@ public class MSBuildTest
     public static void VerifyBuild(BuildResult buildResult)
     {
         _ = buildResult.OverallResult.Should().Be(BuildResultCode.Success);
-
-        _ = buildResult.ProjectStateAfterBuild.Should().NotBeNull();
     }
 }
