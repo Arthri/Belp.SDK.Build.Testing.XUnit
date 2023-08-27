@@ -77,9 +77,9 @@
     <PackageReference Include="$(PackageId)" Version="$(Version)" />
 
     <!-- Hide package source files from project tree -->
-    <Compile Update="@(Compile)">
-      <Visible Condition="'%(Compile.NuGetPackageId)' == '$(PackageId)'">false</Visible>
-      <Link>$(PackageId)\%(Filename)%(Extension)</Link>
+    <Compile Update="@%28Compile)">
+      <Visible Condition="'%%28Compile.NuGetPackageId)' == '$(PackageId)'">false</Visible>
+      <Link>$(PackageId)\%%28Filename)%%28Extension)</Link>
     </Compile>
   </ItemGroup>
 
