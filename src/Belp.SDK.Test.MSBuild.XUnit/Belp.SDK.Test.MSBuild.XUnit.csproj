@@ -88,7 +88,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageAsset Include="$(_SDKSelfReferenceFilePath)" Pack="true" PackagePath="\Sdk\" />
+      <None Include="$(_SDKSelfReferenceFilePath)" Pack="true" PackagePath="\Sdk\" />
     </ItemGroup>
 
     <WriteLinesToFile File="$(_SDKSelfReferenceFilePath)" Lines="$(_SDKSelfReferenceFileContent)" Overwrite="true" WriteOnlyWhenDifferent="true" />
