@@ -45,6 +45,8 @@ internal class MSBuildTest
     public IReadOnlyList<Diagnostic>? ExpectedMessages { get; init; }
     public IReadOnlyList<Diagnostic>? ExpectedDiagnostics { get; init; }
 
+    public IReadOnlyDictionary<string, string?>? ExpectedPropertyValues { get; init; }
+
     /// <summary>
     /// Initializes a new instance of <see cref="MSBuildTest"/>.
     /// </summary>
@@ -122,6 +124,22 @@ internal class MSBuildTest
                 ? Logger.Diagnostics.Should().BeEmpty()
                 : Logger.Diagnostics.Order().Should().BeEquivalentTo(ExpectedDiagnostics.Order())
                 ;
+        }
+
+        if (ExpectedPropertyValues is not null)
+        {
+            foreach ((string key, string? value) in ExpectedPropertyValues)
+            {
+                ProjectPropertyInstance? property = buildResult.ProjectStateAfterBuild.GetProperty(key);
+                if (value is null)
+                {
+                    _ = property.Should().BeNull();
+                    continue;
+                }
+
+                _ = property.Should().NotBeNull();
+                _ = property.EvaluatedValue.Should().Be(value);
+            }
         }
     }
 }
