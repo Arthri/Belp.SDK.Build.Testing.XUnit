@@ -1,4 +1,4 @@
-<Project Sdk="Belp.SDK.PackOnly/0.4.0">
+<Project Sdk="Belp.SDK.PackOnly/0.4.0" TreatAsLocalProperty="_SDKSelfReferenceFilePath;_SDKSelfReferenceFileContent">
 
   <!-- Build Configuration -->
   <PropertyGroup>
@@ -59,5 +59,39 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
+
+
+
+  <!-- Generate Self-Reference -->
+  <PropertyGroup>
+    <BeforePack>$(BeforePack);_GenerateSelfReference</BeforePack>
+  </PropertyGroup>
+
+  <Target Name="_GenerateSelfReference">
+    <PropertyGroup>
+      <_SDKSelfReferenceFilePath>$(IntermediateOutputPath)SelfReference.props</_SDKSelfReferenceFilePath>
+      <_SDKSelfReferenceFileContent>
+<![CDATA[<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <ItemGroup>
+    <PackageReference Include="$(PackageId)" Version="$(Version)" />
+
+    <!-- Hide package source files from project tree -->
+    <Compile Update="@(Compile)">
+      <Visible Condition="'%(Compile.NuGetPackageId)' == '$(PackageId)'">false</Visible>
+      <Link>$(PackageId)\%(Filename)%(Extension)</Link>
+    </Compile>
+  </ItemGroup>
+
+</Project>]]>
+      </_SDKSelfReferenceFileContent>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageAsset Include="$(_SDKSelfReferenceFilePath)" Pack="true" PackagePath="\Sdk\" />
+    </ItemGroup>
+
+    <WriteLinesToFile File="$(_SDKSelfReferenceFilePath)" Lines="$(_SDKSelfReferenceFileContent)" Overwrite="true" WriteOnlyWhenDifferent="true" />
+  </Target>
 
 </Project>

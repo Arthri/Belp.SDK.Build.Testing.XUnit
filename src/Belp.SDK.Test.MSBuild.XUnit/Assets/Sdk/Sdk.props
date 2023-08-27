@@ -21,5 +21,6 @@
 
   <!-- Dependencies -->
   <Import Project="$(MSBuildThisFileDirectory)Dependencies.props" />
+  <Import Project="$(MSBuildThisFileDirectory)SelfReference.props" />
 
 </Project>
