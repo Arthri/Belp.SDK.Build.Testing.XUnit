@@ -7,7 +7,7 @@ namespace Belp.SDK.Test.MSBuild.XUnit;
 /// <summary>
 /// Provides the boilerplate for testing MSBuild projects.
 /// </summary>
-public class MSBuildTest
+internal class MSBuildTest
 {
     /// <summary>
     /// Inherits from <see cref="BuildParameters"/> and sets additional default values.
