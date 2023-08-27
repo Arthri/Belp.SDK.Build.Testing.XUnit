@@ -40,6 +40,11 @@ internal class MSBuildTest
     /// </summary>
     protected XUnitMSBuildLoggerAdapter Logger { get; }
 
+    public IReadOnlyList<Diagnostic>? ExpectedErrors { get; init; }
+    public IReadOnlyList<Diagnostic>? ExpectedWarnings { get; init; }
+    public IReadOnlyList<Diagnostic>? ExpectedMessages { get; init; }
+    public IReadOnlyList<Diagnostic>? ExpectedDiagnostics { get; init; }
+
     /// <summary>
     /// Initializes a new instance of <see cref="MSBuildTest"/>.
     /// </summary>
@@ -93,8 +98,42 @@ internal class MSBuildTest
     /// Verifies the specified build result is successful.
     /// </summary>
     /// <param name="buildResult">The build result to verify.</param>
-    public static void VerifyBuild(BuildResult buildResult)
+    public void VerifyBuild(BuildResult buildResult)
     {
         _ = buildResult.OverallResult.Should().Be(BuildResultCode.Success);
+        _ = ExpectedErrors is null or { Count: 0 }
+            ? Logger.Errors.Should().BeEmpty()
+            : Logger.Errors.Order().Should().BeEquivalentTo(ExpectedErrors.Order())
+            ;
+        _ = ExpectedWarnings is null or { Count: 0 }
+            ? Logger.Warnings.Should().BeEmpty()
+            : Logger.Warnings.Order().Should().BeEquivalentTo(ExpectedWarnings.Order())
+            ;
+        if (ExpectedMessages is not null)
+        {
+            _ = ExpectedMessages is { Count: 0 }
+                ? Logger.Messages.Should().BeEmpty()
+                : Logger.Messages.Order().Should().BeEquivalentTo(ExpectedMessages.Order())
+                ;
+        }
+        if (ExpectedDiagnostics is not null)
+        {
+            _ = ExpectedDiagnostics is { Count: 0 }
+                ? Logger.Diagnostics.Should().BeEmpty()
+                : Logger.Diagnostics.Order().Should().BeEquivalentTo(ExpectedDiagnostics.Order())
+                ;
+        }
+    }
+}
+
+file static class Extensions
+{
+    public static IOrderedEnumerable<Diagnostic> Order(this IEnumerable<Diagnostic> diagnostics)
+    {
+        return diagnostics
+            .OrderBy(static v => v.Severity)
+            .ThenBy(static v => v.Code)
+            .ThenBy(static v => v.Span)
+            ;
     }
 }
