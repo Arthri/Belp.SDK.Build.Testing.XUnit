@@ -1,6 +1,42 @@
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" TreatAsLocalProperty="_TestNuGetConfigContents" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   <Import Project="Sdk.targets" Sdk="Belp.SDK.Common" Version="0.2.0" />
+
+
+
+  <PropertyGroup>
+    <TestTemporaryDirectory>$([System.IO.Path]::GetTempPath())23bf55c5-7020-43d0-a313-9695fe6c313b/Belp.SDK.Test.MSBuild.XUnit/$(MSBuildProjectName)/</TestTemporaryDirectory>
+    <TestPackagesDirectory>$(TestTemporaryDirectory)packages/</TestPackagesDirectory>
+    <TestNuGetCache>$(TestTemporaryDirectory)packages_cache/</TestNuGetCache>
+    <_TestNuGetConfigContents>
+<![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <config>
+    <add key="globalPackagesFolder" value="$(TestNuGetCache)" />
+  </config>
+  <packageSources>
+    <add key="Belp.SDK.Test.MSBuild.XUnit Packages" value="$(TestPackagesDirectory)" />
+  </packageSources>
+</configuration>]]>
+    </_TestNuGetConfigContents>
+  </PropertyGroup>
+
+  <Target Name="PackProjectsUnderTest" AfterTargets="Build">
+    <MSBuild BuildInParallel="true" Projects="@(BuildProjectUnderTest)" Targets="Pack;_GetOutputItemsFromPack">
+      <Output TaskParameter="TargetOutputs" ItemName="_BuildProjectPackOutputs" />
+    </MSBuild>
+
+    <ItemGroup>
+      <_BuildProjectPackages Include="@(_BuildProjectPackOutputs)" Condition="'%(Extension)' == '.nupkg'" />
+    </ItemGroup>
+
+    <MakeDir Directories="$(TestPackagesDirectory)" />
+    <Exec Condition="'@(_BuildProjectPackages)' != ''" Command="dotnet nuget push &quot;@(_BuildProjectPackages, '&quot; &quot;')&quot; -s $(TestPackagesDirectory)" />
+  </Target>
+
+  <Target Name="WriteTestNuGetConfig" AfterTargets="Build">
+    <WriteLinesToFile File="$(TestTemporaryDirectory)nuget.config" Lines="$(_TestNuGetConfigContents)" Overwrite="true" WriteOnlyWhenDifferent="true" />
+  </Target>
 
 </Project>
