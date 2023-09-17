@@ -13,6 +13,7 @@
 
 
 
+  <!-- Build Configuration -->
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
@@ -20,7 +21,8 @@
 
 
   <!-- Dependencies -->
-  <Import Project="$(MSBuildThisFileDirectory)Dependencies.props" />
-  <Import Project="$(MSBuildThisFileDirectory)SelfReference.props" />
+  <ItemGroup>
+    <PackageReference Include="Belp.Build.Test.MSBuild.XUnit" Version="0.0.1" />
+  </ItemGroup>
 
 </Project>

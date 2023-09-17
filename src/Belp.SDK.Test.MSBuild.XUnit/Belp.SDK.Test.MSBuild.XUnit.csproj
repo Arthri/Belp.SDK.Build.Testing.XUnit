@@ -1,24 +1,4 @@
-<Project Sdk="Belp.SDK.PackOnly/0.4.0" TreatAsLocalProperty="_SDKSelfReferenceFilePath;_SDKSelfReferenceFileContent">
-
-  <!-- Build Configuration -->
-  <PropertyGroup>
-    <DisableDefaultBuild>false</DisableDefaultBuild>
-    <TargetFramework>net7.0</TargetFramework>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="**\*$(DefaultLanguageSourceExtension)" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
-    <PackageAsset Include="@(Compile)" BuildAction="Compile" />
-  </ItemGroup>
-
-
-
-  <!-- Compiler Configuration -->
-  <PropertyGroup>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
-
-
+<Project Sdk="Belp.SDK.PackOnly/0.4.0">
 
   <!-- Package Information -->
   <PropertyGroup>
@@ -38,20 +18,6 @@
 
 
 
-  <!-- Dependencies -->
-  <Import Project="$(MSBuildThisFileDirectory)Assets\Sdk\Dependencies.props" />
-
-  <PropertyGroup>
-    <UseXUnitVisualStudioRunner>false</UseXUnitVisualStudioRunner>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Remove="coverlet.collector;Microsoft.NET.Test.Sdk;xunit" />
-    <PackageReference Include="xunit.abstractions" Version="2.0.3" />
-  </ItemGroup>
-
-
-
   <!-- Development Dependencies -->
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
@@ -59,39 +25,5 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-
-
-
-  <!-- Generate Self-Reference -->
-  <PropertyGroup>
-    <BeforePack>$(BeforePack);_GenerateSelfReference</BeforePack>
-  </PropertyGroup>
-
-  <Target Name="_GenerateSelfReference">
-    <PropertyGroup>
-      <_SDKSelfReferenceFilePath>$(IntermediateOutputPath)SelfReference.props</_SDKSelfReferenceFilePath>
-      <_SDKSelfReferenceFileContent>
-<![CDATA[<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
-  <ItemGroup>
-    <PackageReference Include="$(PackageId)" Version="$(Version)" />
-
-    <!-- Hide package source files from project tree -->
-    <Compile Update="@%28Compile)">
-      <Visible Condition="'%%28Compile.NuGetPackageId)' == '$(PackageId)'">false</Visible>
-      <Link>$(PackageId)\%%28Filename)%%28Extension)</Link>
-    </Compile>
-  </ItemGroup>
-
-</Project>]]>
-      </_SDKSelfReferenceFileContent>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <None Include="$(_SDKSelfReferenceFilePath)" Pack="true" PackagePath="\Sdk\" />
-    </ItemGroup>
-
-    <WriteLinesToFile File="$(_SDKSelfReferenceFilePath)" Lines="$(_SDKSelfReferenceFileContent)" Overwrite="true" WriteOnlyWhenDifferent="true" />
-  </Target>
 
 </Project>
