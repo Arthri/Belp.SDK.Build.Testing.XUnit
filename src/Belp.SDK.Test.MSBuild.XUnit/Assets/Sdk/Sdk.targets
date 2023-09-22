@@ -6,7 +6,7 @@
 
 
   <PropertyGroup>
-    <TestTemporaryDirectory>$([System.IO.Path]::GetTempPath())23bf55c5-7020-43d0-a313-9695fe6c313b/Belp.SDK.Test.MSBuild.XUnit/$(MSBuildProjectName)/</TestTemporaryDirectory>
+    <TestTemporaryDirectory>$([System.IO.Path]::GetTempPath())23bf55c5-7020-43d0-a313-9695fe6c313b/Belp.SDK.Test.MSBuild.XUnit/$(AssemblyName)/</TestTemporaryDirectory>
     <TestPackagesDirectory>$(TestTemporaryDirectory)packages/</TestPackagesDirectory>
     <TestPackagesCacheDirectory>$(TestTemporaryDirectory)packages_cache/</TestPackagesCacheDirectory>
     <_TestNuGetConfigContents>
