@@ -8,12 +8,12 @@
   <PropertyGroup>
     <TestTemporaryDirectory>$([System.IO.Path]::GetTempPath())23bf55c5-7020-43d0-a313-9695fe6c313b/Belp.SDK.Test.MSBuild.XUnit/$(MSBuildProjectName)/</TestTemporaryDirectory>
     <TestPackagesDirectory>$(TestTemporaryDirectory)packages/</TestPackagesDirectory>
-    <TestNuGetCache>$(TestTemporaryDirectory)packages_cache/</TestNuGetCache>
+    <TestPackagesCacheDirectory>$(TestTemporaryDirectory)packages_cache/</TestPackagesCacheDirectory>
     <_TestNuGetConfigContents>
 <![CDATA[<?xml version="1.0" encoding="utf-8"?>
 <configuration>
   <config>
-    <add key="globalPackagesFolder" value="$(TestNuGetCache)" />
+    <add key="globalPackagesFolder" value="$(TestPackagesCacheDirectory)" />
   </config>
   <packageSources>
     <add key="Belp.SDK.Test.MSBuild.XUnit Packages" value="$(TestPackagesDirectory)" />
@@ -36,6 +36,7 @@
   </Target>
 
   <Target Name="WriteTestNuGetConfig" AfterTargets="Build">
+    <MakeDir Directories="$(TestPackagesCacheDirectory)" />
     <WriteLinesToFile File="$(TestTemporaryDirectory)nuget.config" Lines="$(_TestNuGetConfigContents)" Overwrite="true" WriteOnlyWhenDifferent="true" />
   </Target>
 
