@@ -2,4 +2,11 @@
 
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
 
+
+
+  <!-- Hint for FastUpToDateCheck -->
+  <ItemGroup>
+    <ProjectReference Include="@(TestProjectReference)" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
 </Project>
