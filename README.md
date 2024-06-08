@@ -1,2 +1,2 @@
-# Belp.SDK.Test.MSBuild.xUnit
-An MSBuild SDK for testing MSBuild configuration files with xUnit.
+# Belp.SDK.Build.Testing.XUnit
+An internal Belp SDK for testing MSBuild projects and packages with xUnit.

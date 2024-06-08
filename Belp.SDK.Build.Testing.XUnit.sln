@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Belp.SDK.Test.MSBuild.XUnit", "src\Belp.SDK.Test.MSBuild.XUnit\Belp.SDK.Test.MSBuild.XUnit.csproj", "{8486E118-F2B9-4E98-8048-1B03821DEE51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Belp.SDK.Build.Testing.XUnit", "src\Belp.SDK.Build.Testing.XUnit\Belp.SDK.Build.Testing.XUnit.csproj", "{8486E118-F2B9-4E98-8048-1B03821DEE51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

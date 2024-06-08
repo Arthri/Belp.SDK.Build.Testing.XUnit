@@ -2,10 +2,10 @@
 
   <!-- Package Information -->
   <PropertyGroup>
-    <Description>An SDK for testing MSBuild configurations with xUnit.</Description>
+    <Description>An internal Belp SDK for testing MSBuild projects and packages with xUnit.</Description>
     <DevelopmentDependency>true</DevelopmentDependency>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/Arthri/Belp.SDK.Test.MSBuild.xUnit/</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Arthri/Belp.SDK.Build.Testing.XUnit/</PackageProjectUrl>
     <PackageTags>msbuild;sdk;test;xunit</PackageTags>
     <Product>Belp</Product>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <CopyrightOwner Include="Arthri" Years="2023" />
+    <CopyrightOwner Include="Arthri" Years="2023, 2024" />
   </ItemGroup>
 
 
