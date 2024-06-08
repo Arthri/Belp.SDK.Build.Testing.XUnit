@@ -9,6 +9,10 @@
     <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)..\content\xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 
 
   <!-- Compiler Configuration -->
@@ -30,7 +34,7 @@
 
   <!-- Dependencies -->
   <ItemGroup>
-    <PackageReference Include="Belp.Build.Testing" Version="1.0.0" />
+    <PackageReference Include="Belp.Build.Testing" Version="1.0.1" />
     <PackageReference Include="coverlet.collector" Version="6.0.1">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>

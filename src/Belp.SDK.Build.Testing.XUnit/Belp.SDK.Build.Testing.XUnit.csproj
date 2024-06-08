@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <CopyrightOwner Include="Arthri" Years="2023, 2024" />
+    <PackageAsset Update="Assets/content/xunit.runner.json" PackageCopyToOutput="true" />
   </ItemGroup>
 
 
