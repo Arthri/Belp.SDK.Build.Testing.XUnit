@@ -6,7 +6,7 @@
 
   <!-- Hint for FastUpToDateCheck -->
   <ItemGroup>
-    <ProjectReference Include="@(TestProjectReference)" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="@(TestProjectReference)" ReferenceOutputAssembly="false" Targets="Pack" />
   </ItemGroup>
 
 </Project>
