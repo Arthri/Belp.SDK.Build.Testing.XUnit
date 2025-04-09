@@ -1,0 +1,17 @@
+name: Publish
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  publish-nuget:
+    uses: Arthri/publish-dotnet/.github/workflows/publish-nuget.yml@v2
+    permissions:
+      contents: read
+    secrets:
+      NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+    with:
+      changelog: ${{ github.event.release.body }}
+      version: ${{ github.event.release.tag_name }}
