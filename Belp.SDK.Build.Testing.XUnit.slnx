@@ -1,0 +1,6 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Release" />
+  </Configurations>
+  <Project Path="src/Belp.SDK.Build.Testing.XUnit/Belp.SDK.Build.Testing.XUnit.csproj" />
+</Solution>
