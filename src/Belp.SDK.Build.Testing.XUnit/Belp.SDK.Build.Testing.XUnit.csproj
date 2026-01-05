@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <CopyrightOwner Include="Arthri" Years="2023, 2024, 2025" />
+    <CopyrightOwner Include="Arthri" Years="2023, 2024, 2025, 2026" />
     <PackageAsset Update="Assets/content/xunit.runner.json" PackageCopyToOutput="true" />
   </ItemGroup>
 
